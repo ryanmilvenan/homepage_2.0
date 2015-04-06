@@ -54,3 +54,15 @@ Yes- limited API support, RSS, user experience, make it personal and customizabl
 
 ###Is this going to be a Chrome extension or its own website?
 Its own website- we are going to use Node, Mongo backend, and React among others
+
+###User accounts?
+Yes, ideally using Facebook/Google login
+
+###Web/mobile?
+We will design for web, and ideally make it able to display on mobile as well
+
+###What kind of content will be displayed in the widgets?
+Depends on what each API provides, may just be a link to the different websites if no summary information is available
+
+###Are users able to pick what feeds and APIs are available?
+APIs will be hardcoded, RSS feeds can be chosen from a list or input by the user and verified to make sure it is a valid feed
