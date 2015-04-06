@@ -1,4 +1,4 @@
-# Romepage_2.0
+# Homepage_2.0
 An aggregator for everything you want online.
 
 ##Team Name 
