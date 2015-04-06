@@ -47,3 +47,10 @@ Ryan - sessions, database, build automation
 2. Create user system, default content for no sign-in, and multiple tabs to support separate layouts
 3. External API integration
 4. Improve UI and UX
+
+##Q/As
+###Are you making iGoogle? Similar features? 
+Yes- limited API support, RSS, user experience, make it personal and customizable
+
+###Is this going to be a Chrome extension or its own website?
+Its own website- we are going to use Node, Mongo backend, and React among others
