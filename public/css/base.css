@@ -1,0 +1,171 @@
+@font-face {
+    font-family: 'icomoon';
+    src:url('../fonts/icomoon.eot?2q62uk');
+    src:url('../fonts/icomoon.eot?#iefix2q62uk') format('embedded-opentype'),
+        url('../fonts/icomoon.woff?2q62uk') format('woff'),
+        url('../fonts/icomoon.ttf?2q62uk') format('truetype'),
+        url('../fonts/icomoon.svg?2q62uk#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-plus:before {
+    content: "\ea0a";
+}
+
+.icon-cross:before {
+    content: "\ea0f";
+}
+
+.icon-cross {
+    color: red;
+}
+
+.icon-plus {
+    color: blue;
+}
+
+body {
+  background: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0;
+  padding: 30px;
+}
+
+a {
+  color: #4183c4;
+  text-decoration: none;
+  font-size: 0.8em;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+div.row {
+    margin-bottom: 1em;
+}
+
+code {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-family: "Bitstream Vera Sans Mono", Consolas, Courier, monospace;
+  font-size: 12px;
+  margin: 0 2px;
+  padding: 0px 5px;
+}
+
+h1, h2, h3, h4 {
+  font-weight: bold;
+  margin: 0 0 15px;
+  padding: 0;
+}
+
+h1 {
+  border-bottom: 1px solid #ddd;
+  font-size: 2.5em;
+  font-weight: bold;
+  margin: 0 0 15px;
+  padding: 0;
+}
+
+h2 {
+  border-bottom: 1px solid #eee;
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1.2em;
+}
+
+p, ul {
+  margin: 15px 0;
+}
+
+ul {
+  padding-left: 30px;
+}
+
+.add-source-form {
+    padding-left: 1em;
+    border-left: 1px solid black;
+}
+
+.news-container {
+    width:10em;
+    border: 1px solid blue;
+    border-radius: 5px;
+    padding-left:0.3em;
+    padding-right:0.3em;
+}
+
+.container-title {
+    text-align: center;
+    border-bottom: 1px solid blue;
+}
+
+.feed-item {
+    border-bottom: 1px dashed black;
+    z-index: -1;
+}
+
+.delete-button {
+    height:1em;
+    width:1em;
+    float: right;
+    position: relative;
+    margin-top: 0.4em;
+}
+
+.delete-button a {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    text-decoration: none;
+    z-index: 10;
+}
+
+.expand-button {
+    height:1em;
+    width:1em;
+    position: relative;
+    display: block-inline;
+    float:left;
+    margin-top: 0.3em;
+    margin-right: 0.2em;
+    border: 1px dashed blue;
+    border-radius: 3px;
+}
+
+.expand-button a {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    text-decoration: none;
+    z-index: 10;
+}
