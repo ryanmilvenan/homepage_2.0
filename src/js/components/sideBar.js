@@ -4,21 +4,20 @@ var ButtonGroup = require('react-bootstrap').ButtonGroup;
 var Modal = require('react-bootstrap').Modal;
 var ModalTrigger = require('react-bootstrap').ModalTrigger;
 var AddSourceForm = require('./addSourceForm');
+var ImportForm = require('./importForm');
 
 
 var SideBar = React.createClass({
     getInitialState: function() {
-        return {sourceForm: false}
+        return {sourceForm: false};
     },
     toggleHidden: function() {
         if(this.state.sourceForm) {
-            this.setState({sourceForm: false})
+            this.setState({sourceForm: false});
         } else
-            this.setState({sourceForm: true}) 
+            this.setState({sourceForm: true});
     },
     render: function() {
-        var Button = ReactBootstrap.Button;
-        var ButtonGroup = ReactBootstrap.ButtonGroup;
         // var Glyphicon = ReactBootstrap.Glyphicon;
         return (
             <div className="side-bar col-xs-3 text-center">

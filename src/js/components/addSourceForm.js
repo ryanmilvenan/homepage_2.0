@@ -23,7 +23,7 @@ var AddSourceForm = React.createClass({
     },
     render: function() {
         return (
-            <form className="add-source-form" onSubmit={this.handleSubmit}>
+            <form className="add-source-form col-xs-2" onSubmit={this.handleSubmit}>
                 <Input type="text" placeholder="Title" ref="title" />
                 <Input type="text" placeholder="URL" ref="url" />
                 <Input type="submit" value="Add source" />
