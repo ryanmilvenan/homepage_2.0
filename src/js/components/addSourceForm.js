@@ -1,4 +1,5 @@
 var React = require('react');
+var Input = require('react-bootstrap').Input;
 var socket = require('./socket');
 
 var AddSourceForm = React.createClass({
@@ -22,10 +23,10 @@ var AddSourceForm = React.createClass({
     },
     render: function() {
         return (
-            <form className="add-source-form two columns" onSubmit={this.handleSubmit}>
-                <input type="text" placeholder="Title" ref="title" />
-                <input type="text" placeholder="URL" ref="url" />
-                <input type="submit" value="Add source" />
+            <form className="add-source-form" onSubmit={this.handleSubmit}>
+                <Input type="text" placeholder="Title" ref="title" />
+                <Input type="text" placeholder="URL" ref="url" />
+                <Input type="submit" value="Add source" />
             </form>
         );
     }
