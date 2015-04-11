@@ -4,6 +4,14 @@ var Nav = ReactBootstrap.Nav;
 var NavItem = ReactBootstrap.NavItem;
 var DropdownButton = ReactBootstrap.DropdownButton;
 var MenuItem = ReactBootstrap.MenuItem;
+var Grid = ReactBootstrap.Grid;
+var Col = ReactBootstrap.Col;
+var Row = ReactBootstrap.Row;
+var Modal = ReactBootstrap.Modal;
+var ModalTrigger = ReactBootstrap.ModalTrigger;
+var Button = ReactBootstrap.Button;
+var Input = ReactBootstrap.Input;
+
 
 var NewsItem = React.createClass({
     getInitialState: function() {
@@ -49,7 +57,7 @@ var NewsContainer = React.createClass({
             )
         })
         return (
-            <div className= "news-container three columns">
+            <div className= "news-container col-xs-3">
                 <div className= "delete-button icon-cross">
                     <a href="#" onClick={this.deleteSource}></a>
                 </div>
@@ -74,13 +82,49 @@ var SideBar = React.createClass({
             this.setState({sourceForm: true}) 
     },
     render: function() {
+        var Button = ReactBootstrap.Button;
+        var ButtonGroup = ReactBootstrap.ButtonGroup;
+        // var Glyphicon = ReactBootstrap.Glyphicon;
         return (
-            <div>
-                <button onClick={this.toggleHidden}>Hide</button>
+            <div className="side-bar col-xs-3">
+                <div>
+                    <ButtonGroup vertical>
+                        <Button bsStyle='primary'>Sign in</Button>
+                        <ModalTrigger modal={<ImportForm />}>
+                            <Button>Import</Button>
+                        </ModalTrigger>                             
+                        <Button>Export</Button>
+                    </ButtonGroup>
+                </div>   
+                <br/>
+                <div>
+                    <div className= "add-button icon-plus">
+                        <a href="#" onClick={this.toggleHidden}></a>
+                    </div>
+                </div>
+                
                 {this.state.sourceForm ? <AddSourceForm url={this.props.url} /> : null }
             </div>
         )
     }
+});
+
+var ImportForm = React.createClass({
+  render() {
+    return (
+      <Modal {...this.props} bsStyle='primary' title='Import a template' animation={false}>
+        <div className='modal-body'>
+            <form>
+                <Input type='file' label='File' help='Select a JSON template file.' />
+            </form>
+        </div>
+
+        <div className='modal-footer'>
+            <Button onClick={this.props.onRequestHide}>Load template</Button>
+        </div>
+      </Modal>
+    );
+  }
 });
 
 var AddSourceForm = React.createClass({
@@ -104,10 +148,10 @@ var AddSourceForm = React.createClass({
     },
     render: function() {
         return (
-            <form className="add-source-form two columns" onSubmit={this.handleSubmit}>
-                <input type="text" placeholder="Title" ref="title" />
-                <input type="text" placeholder="URL" ref="url" />
-                <input type="submit" value="Add source" />
+            <form className="add-source-form col-xs-2" onSubmit={this.handleSubmit}>
+                <Input type="text" placeholder="Title" ref="title" />
+                <Input type="text" placeholder="URL" ref="url" />
+                <Input type="submit" value="Add source" />
             </form>
         );
     }
@@ -137,29 +181,49 @@ var DisplayCase = React.createClass({
         }) 
 
         return (
-            <div className="display-case nine columns">
+            <div className="display-case col-xs-9">
                 {rows}
             </div>
         );
     }
 });
 
-var NavBar = React.createClass({ 
+var NavBar = React.createClass({   
     render: function() {
+        var ButtonToolbar = ReactBootstrap.ButtonToolbar;
+        var Button = ReactBootstrap.Button;
+        var DropdownButton = ReactBootstrap.DropdownButton;
+        var buttonsInstance = (
+            <ButtonToolbar>
+              <Button>Default</Button>
+            </ButtonToolbar>
+        );
+
         return (                
             <Navbar brand='React-Bootstrap'>
                 <Nav>
-                  <NavItem eventKey={1} href='#'>Link</NavItem>
-                  <NavItem eventKey={2} href='#'>Link</NavItem>
-                  <DropdownButton eventKey={3} title='Dropdown'>
-                    <MenuItem eventKey='1'>Action</MenuItem>
-                    <MenuItem eventKey='2'>Another action</MenuItem>
-                    <MenuItem eventKey='3'>Something else here</MenuItem>
-                    <MenuItem divider />
-                    <MenuItem eventKey='4'>Separated link</MenuItem>
-                  </DropdownButton>
+                    <NavItem eventKey={1} href='#'>Link</NavItem>
+                    <NavItem eventKey={2} href='#'>Link</NavItem>
+                    <DropdownButton bsStyle='primary' eventKey={3} title='Add an API'>
+                        <MenuItem eventKey='1'>
+                            <form className="add-source-form col-xs-2" onSubmit={this.handleSubmit}>
+                                <input type="text" placeholder="Title" ref="title" />
+                                <br/>
+                                <input type="text" placeholder="URL" ref="url" />
+                                <br/>
+                                <input type="submit" value="Add source" />
+                            </form>
+                        </MenuItem>
+                        <MenuItem eventKey='2'>Another action</MenuItem>
+                        <MenuItem eventKey='3'>Something else here</MenuItem>
+                        <MenuItem divider />
+                        <MenuItem eventKey='4'>Separated link</MenuItem>
+                    </DropdownButton>
+                    <Button>Import</Button>
+                    <Button>Export</Button>
                 </Nav>
-            </Navbar>  
+            </Navbar>
+
         );
     }
 });
@@ -182,7 +246,7 @@ var NewsStand = React.createClass({
     },
     render: function() {
         return (
-            <div className="news-stand twelve columns">
+            <div className="news-stand col-xs-12">
                 <NavBar url={this.props.url} />
                 <DisplayCase url={this.props.url} data={this.state.data} />
                 <SideBar url={this.props.url} />
