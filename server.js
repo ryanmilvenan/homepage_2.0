@@ -6,6 +6,7 @@ var socket = require('./lib/io.js');
 var db = require('./lib/db.js');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
+var uuid = require('node-uuid');
 var app = express();
 
 app.use('/', express.static(path.join(__dirname, 'public')));
@@ -14,7 +15,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(session({
     genid: function(req) {
-        return genuuid();
+        return uuid.v4();
     },
     secret: "Keyboard cat",
     proxy: true,
