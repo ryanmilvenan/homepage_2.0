@@ -4,6 +4,7 @@ var Nav = ReactBootstrap.Nav;
 var NavItem = ReactBootstrap.NavItem;
 var DropdownButton = ReactBootstrap.DropdownButton;
 var MenuItem = ReactBootstrap.MenuItem;
+var ResponsiveReactGridLayout = ReactGridLayout.Responsive;
 
 var NewsItem = React.createClass({
     getInitialState: function() {
@@ -49,7 +50,7 @@ var NewsContainer = React.createClass({
             )
         })
         return (
-            <div className= "news-container three columns">
+            <div className= "news-container">
                 <div className= "delete-button icon-cross">
                     <a href="#" onClick={this.deleteSource}></a>
                 </div>
@@ -68,15 +69,19 @@ var SideBar = React.createClass({
         return {sourceForm: false}
     },
     toggleHidden: function() {
-        if(this.state.sourceForm) {
-            this.setState({sourceForm: false})
-        } else
-            this.setState({sourceForm: true}) 
+        var formBlob = new Blob(["blahblah","hhhhhhhhh"], {type:'application/json'});
+        var file = React.findDOMNode(this.refs.file)
+        file.href = window.URL.createObjectURL(formBlob)
+        // if(this.state.sourceForm) {
+        //     this.setState({sourceForm: false})
+        // } else
+        //     this.setState({sourceForm: true}) 
     },
     render: function() {
         return (
             <div>
                 <button onClick={this.toggleHidden}>Hide</button>
+                <a href="#" ref="file" download>download</a>
                 {this.state.sourceForm ? <AddSourceForm url={this.props.url} /> : null }
             </div>
         )
@@ -137,8 +142,8 @@ var DisplayCase = React.createClass({
         }) 
 
         return (
-            <div className="display-case nine columns">
-                {rows}
+            <div className="display-case">
+                <BasicLayout data={this.props.data}/>
             </div>
         );
     }
@@ -182,16 +187,101 @@ var NewsStand = React.createClass({
     },
     render: function() {
         return (
-            <div className="news-stand twelve columns">
+            <div className="news-stand">
                 <NavBar url={this.props.url} />
                 <DisplayCase url={this.props.url} data={this.state.data} />
                 <SideBar url={this.props.url} />
+                
             </div>
         );
     }
     
 });
 
+var BasicLayout = React.createClass({
+  propTypes: {
+    onLayoutChange: React.PropTypes.func.isRequired
+  },
+
+  getDefaultProps() {
+    return {
+      className: "layout",
+      rowHeight: 30,
+      cols: {lg: 12, md: 10, sm: 6, xs: 4, xxs: 2}
+    };
+  },
+
+  getInitialState() {
+    return {
+      layouts: {lg: this.generateLayout()},
+      currentBreakpoint: 'lg'
+    };
+  },
+
+  generateDOM() {
+    var counter = 0
+    var containers = this.props.data.map(function(container) {
+        counter += 1
+            return (
+                <div key={counter}>
+                    <NewsContainer key={container.id} url={container.url} title={container.title} sourceID={container.sourceID} numItems={10} />
+                </div>
+            );
+        });
+    return containers
+
+    // return _.map(this.state.layouts.lg, function(l, i) {
+    //   return (
+    //     <div key={i} className={l.static ? 'static' : ''}>
+    //       {l.static ?
+    //         <span className="text" title="This item is static and cannot be removed or resized.">Static - {i}</span>
+    //         : <span className="text">{i}</span>
+    //       }
+    //     </div>);
+    // });
+  },
+
+  generateLayout() {
+    var p = this.props;
+    return _.map(_.range(0, 25), function(item, i) {
+      var y = _.result(p, 'y') || Math.ceil(Math.random() * 4) + 1;
+      return {x: _.random(0, 5) * 2 % 12, y: Math.floor(i / 6) * y, w: 2, h: y, i: i, static: Math.random() < 0.05};
+    });
+  },
+
+  onBreakpointChange(breakpoint) {
+    this.setState({
+      currentBreakpoint: breakpoint
+    });
+  },
+
+  onLayoutChange(layout) {
+    // this.props.onLayoutChange(layout);
+  },
+
+  onNewLayout() {
+    this.setState({
+      layouts: {lg: this.generateLayout()}
+    });
+  },
+
+  render() {
+    return (
+      <div>
+        <div>Current Breakpoint: {this.state.currentBreakpoint} ({this.props.cols[this.state.currentBreakpoint]} columns)</div>
+        <button onClick={this.onNewLayout}>Generate New Layout</button>
+        <ResponsiveReactGridLayout
+            layouts={this.state.layouts}
+            onBreakpointChange={this.onBreakpointChange}
+            onLayoutChange={this.onLayoutChange}
+            useCSSTransforms={true}
+            {...this.props}>
+          {this.generateDOM()}
+        </ResponsiveReactGridLayout>
+      </div>
+    );
+  }
+});
 
 React.render(
     <NewsStand url='http://localhost:3000/sources' />,
