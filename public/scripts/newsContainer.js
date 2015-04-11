@@ -86,22 +86,19 @@ var SideBar = React.createClass({
         var ButtonGroup = ReactBootstrap.ButtonGroup;
         // var Glyphicon = ReactBootstrap.Glyphicon;
         return (
-            <div className="side-bar col-xs-3">
-                <div>
-                    <ButtonGroup vertical>
-                        <Button bsStyle='primary'>Sign in</Button>
+            <div className="side-bar col-xs-3 text-center">
+                    <Button bsStyle='primary' block>Sign in</Button><br/>
+                    <h4>Share your dashboard template.</h4>
+                    <ButtonGroup vertical className="import-export-buttons">
                         <ModalTrigger modal={<ImportForm />}>
                             <Button>Import</Button>
                         </ModalTrigger>                             
                         <Button>Export</Button>
                     </ButtonGroup>
-                </div>   
-                <br/>
-                <div>
-                    <div className= "add-button icon-plus">
+                    <br/>
+                    <div className="add-button icon-plus">
                         <a href="#" onClick={this.toggleHidden}></a>
                     </div>
-                </div>
                 
                 {this.state.sourceForm ? <AddSourceForm url={this.props.url} /> : null }
             </div>
