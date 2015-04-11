@@ -21,7 +21,7 @@ var NewsStand = React.createClass({
     },
     render: function() {
         return (
-            <div className="news-stand twelve columns">
+            <div className="news-stand">
                 <NavBar />
                 <DisplayCase url={this.props.url} data={this.state.data} />
                 <SideBar url={this.props.url} />

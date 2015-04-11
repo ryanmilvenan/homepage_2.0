@@ -25,7 +25,7 @@ var NewsContainer = React.createClass({
             )
         })
         return (
-            <div className= "news-container three columns">
+            <div className= "news-container">
                 <div className= "delete-button icon-cross">
                     <a href="#" onClick={this.deleteSource}></a>
                 </div>
