@@ -30,4 +30,4 @@ node_modules
 
 mongodb/
 
-bower_components/
+public/scripts/*.js
