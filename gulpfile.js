@@ -1,9 +1,10 @@
 var gulp        = require('gulp'),
     plugins     = require('gulp-load-plugins')({
-        pattern: ['gulp-*', 'gulp.*', 'main-bower-files'],
-        replaceString: /\bgulp[\-.]/
+                    pattern: ['gulp-*', 'gulp.*', 'main-bower-files', 'browserify', 'reactify', 'uglifyify', 'envify'],
+                    replaceString: /\bgulp[\-.]/
     }),
-    dest        = 'public/';
+    dest        = 'public/',
+    source      = require('vinyl-source-stream');
 
 gulp.task('develop', function(cb) {
     return plugins.nodemon({ script: 'server.js', ext: 'html js'})
@@ -11,14 +12,16 @@ gulp.task('develop', function(cb) {
     });
 });
 
-gulp.task('js', function() {
-    gulp.src(plugins.mainBowerFiles())
-        .pipe(plugins.filter('*.js'))
-        .pipe(plugins.concat('main.js'))
-        .pipe(plugins.uglify())
-        .pipe(gulp.dest(dest+'scripts')); 
+gulp.task('browserify', function() {
+    return plugins.browserify('./src/js/app.js')
+        .transform(plugins.reactify)
+        .transform(plugins.envify)
+        .transform(plugins.uglifyify)
+        .bundle()
+        .pipe(source('bundle.js'))
+        .pipe(gulp.dest(dest+'scripts'));
 });
 
-gulp.task('default', ['js','develop'], function() {
+gulp.task('default', ['browserify','develop'], function() {
 
 });
