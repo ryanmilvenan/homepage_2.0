@@ -21,7 +21,7 @@ var NewsStand = React.createClass({
     },
     render: function() {
         return (
-            <div className="news-stand">
+            <div className="news-stand col-xs-12">
                 <NavBar />
                 <DisplayCase url={this.props.url} data={this.state.data} />
                 <SideBar url={this.props.url} />
