@@ -109,15 +109,20 @@ ul {
 
 .add-source-form {
     padding-left: 1em;
-    border-left: 1px solid black;
+    /*border-left: 1px solid black;*/
+}
+
+.add-source-form Input {
+  width: auto;
 }
 
 .news-container {
-    width:10em;
+    /*width:10em;*/
     border: 1px solid blue;
     border-radius: 5px;
     padding-left:0.3em;
     padding-right:0.3em;
+    margin:0.3em;
 }
 
 .container-title {
@@ -130,6 +135,10 @@ ul {
     z-index: -1;
 }
 
+.import-export-buttons{
+  text-align: center;
+}
+
 .delete-button {
     height:1em;
     width:1em;
@@ -139,6 +148,24 @@ ul {
 }
 
 .delete-button a {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    text-decoration: none;
+    z-index: 10;
+}
+
+.add-button {
+    height:1em;
+    width:1em;
+    float: center;
+    position: absolute;
+    font-size:70px;
+}
+
+.add-button a {
     position: absolute;
     height: 100%;
     width: 100%;

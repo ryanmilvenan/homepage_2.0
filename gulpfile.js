@@ -1,13 +1,13 @@
 var gulp        = require('gulp'),
     plugins     = require('gulp-load-plugins')({
-                    pattern: ['gulp-*', 'gulp.*', 'main-bower-files', 'browserify', 'reactify', 'uglifyify', 'envify'],
+                    pattern: ['gulp-*', 'gulp.*', 'browserify', 'reactify', 'uglifyify', 'envify'],
                     replaceString: /\bgulp[\-.]/
     }),
     dest        = 'public/',
     source      = require('vinyl-source-stream');
 
-gulp.task('develop', function(cb) {
-    return plugins.nodemon({ script: 'server.js', ext: 'html js'})
+gulp.task('develop', ['browserify'], function(cb) {
+    return plugins.nodemon({ script: 'server.js', ext: 'html js', tasks: ['browserify']})
     .on('start', function() {
     });
 });

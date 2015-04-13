@@ -18,6 +18,8 @@ app.use(session({
         return uuid.v4();
     },
     secret: "Keyboard cat",
+    resave: false,
+    saveUninitialized: true,
     proxy: true,
     cookie: {maxAge: 60000},
     store: new MongoStore({mongooseConnection: db.mongoose.connection})
