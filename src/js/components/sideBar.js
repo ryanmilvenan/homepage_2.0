@@ -1,4 +1,5 @@
 var React = require('react');
+var socket = require('./socket');
 var Button = require('react-bootstrap').Button;
 var ButtonGroup = require('react-bootstrap').ButtonGroup;
 var Modal = require('react-bootstrap').Modal;
@@ -8,8 +9,12 @@ var ImportForm = require('./importForm');
 
 
 var SideBar = React.createClass({
+    updateExportObj: function(data) {
+        this.setState({exportObj:data})
+    },
     getInitialState: function() {
-        return {sourceForm: false};
+        socket.on('sources:found', this.updateExportObj);
+        return {sourceForm: false, exportObj:{}};
     },
     toggleHidden: function() {
         if(this.state.sourceForm) {
