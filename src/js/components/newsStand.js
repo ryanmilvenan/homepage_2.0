@@ -3,6 +3,7 @@ var socket = require('./socket');
 var NavBar = require('./navBar');
 var DisplayCase = require('./displayCase');
 var SideBar = require('./sideBar');
+var TopBar = require('./topBar');
 
 var NewsStand = React.createClass({
     loadNewsSources: function() {
@@ -22,9 +23,9 @@ var NewsStand = React.createClass({
     render: function() {
         return (
             <div className="news-stand col-xs-12">
-                <NavBar />
+                <SideBar url={this.props.url} />                
+                <TopBar />
                 <DisplayCase url={this.props.url} data={this.state.data} />
-                <SideBar url={this.props.url} />
             </div>
         );
     }

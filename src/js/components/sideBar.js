@@ -5,7 +5,8 @@ var Modal = require('react-bootstrap').Modal;
 var ModalTrigger = require('react-bootstrap').ModalTrigger;
 var AddSourceForm = require('./addSourceForm');
 var ImportForm = require('./importForm');
-
+var OverlayTrigger = require('react-bootstrap').OverlayTrigger;
+var Popover = require('react-bootstrap').Popover;
 
 var SideBar = React.createClass({
     getInitialState: function() {
@@ -30,9 +31,14 @@ var SideBar = React.createClass({
                         <Button>Export</Button>
                     </ButtonGroup>
                     <br/>
-                    <div className="add-button icon-plus">
-                        <a href="#" onClick={this.toggleHidden}></a>
-                    </div>
+                    // <div className="add-button icon-plus">
+                    //     <a href="#" onClick={this.toggleHidden}></a>
+                    // </div>
+                    <OverlayTrigger trigger='click' placement='right' overlay={<Popover title='Add an API'> Check this info.</Popover>}>
+                        <div className="add-button icon-plus">
+                            <a href="#" onClick={this.toggleHidden}></a>
+                        </div>                      
+                    </OverlayTrigger>                    
                 
                 {this.state.sourceForm ? <AddSourceForm url={this.props.url} /> : null }
             </div>
