@@ -1,6 +1,10 @@
 var React = require('react');
 var socket = require('./socket');
 var NewsItem = require('./newsItem');
+var Panel = require('./PanelWithButton');
+// var Panel = require('react-bootstrap').Panel;
+var ListGroup = require('react-bootstrap').ListGroup;
+var ListGroupItem = require('react-bootstrap').ListGroupItem;
 
 var NewsContainer = React.createClass({
     updateItems: function(item) {
@@ -21,19 +25,15 @@ var NewsContainer = React.createClass({
         var slice = this.state.data.slice(0, this.props.numItems);
         var items = slice.map(function(item) {
             return (
-                <NewsItem link={item.link} title={item.title} data={item} />
+                <ListGroupItem><a href={item.link}>{item.title}</a></ListGroupItem>
             )
         })
         return (
-            <div className= "news-container">
-                <div className= "delete-button icon-cross">
-                    <a href="#" onClick={this.deleteSource}></a>
-                </div>
-                <h3 className="container-title">
-                    {this.props.title}
-                </h3>
-                {items}
-            </div>
+            <Panel collapsable defaultExpanded header={this.props.title}>
+                <ListGroup fill>
+                    {items}
+                </ListGroup>
+            </Panel>
         );
     }
 
