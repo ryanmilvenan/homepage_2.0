@@ -13,9 +13,7 @@ var NewsItem = React.createClass({
     },
     render: function() {
         return (
-            <div className="feed-item">
-                <a href={this.props.link}>{this.props.title}</a>
-            </div>
+            <ListGroupItem><a href={this.props.link}>{this.props.title}</a></ListGroupItem>
         )
     }
 });
