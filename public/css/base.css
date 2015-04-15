@@ -36,7 +36,7 @@
 }
 
 .icon-plus {
-    color: blue;
+    color: #1A619F;
 }
 
 body {
@@ -172,9 +172,11 @@ ul {
 .add-button {
     height:1em;
     width:1em;
-    float: center;
-    position: absolute;
+    float: right;
+    position: fixed;
     font-size:70px;
+    bottom: 70px;
+    right: 50px;
 }
 
 .add-button a {
@@ -185,6 +187,7 @@ ul {
     left: 0;
     text-decoration: none;
     z-index: 10;
+    float: right;
 }
 
 .expand-button {
