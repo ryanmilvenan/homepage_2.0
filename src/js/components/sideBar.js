@@ -69,7 +69,7 @@ var SideBar = React.createClass({
                     </div>                      
                 </OverlayTrigger>               
                 
-                {this.state.sourceForm ? <AddSourceForm url={this.props.url} /> : null }
+                {this.state.sourceForm ? <AddSourceForm url={this.props.url}/> : null }
             </div>
         )
     }
