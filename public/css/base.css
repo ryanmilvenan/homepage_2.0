@@ -264,3 +264,11 @@ ul {
 .react-grid-item:hover .react-grid-resize-handle {
   opacity: 1;
 }
+
+.log-out-btn {
+    width: 100%;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 0.8em;
+    padding: 10px 15px;
+}

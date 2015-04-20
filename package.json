@@ -4,6 +4,7 @@
   "description": "An RSS feed reader homepage",
   "main": "server.js",
   "dependencies": {
+    "bcrypt": "^0.8.2",
     "body-parser": "^1.4.3",
     "class-set": "0.0.4",
     "classnames": "^1.2.0",

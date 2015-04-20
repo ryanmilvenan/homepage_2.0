@@ -26,8 +26,27 @@ var SideBar = React.createClass({
         console.log(data);
     },
     getInitialState: function() {
+        socket.on('server:user-exists', this.warnExistingUser);
+        socket.on('server:invalid-password', this.warnInvalidPassword);
+        socket.on('server:log-in', this.setLoggedIn);
+        socket.on('server:log-out', this.setLoggedOut);
         socket.on('sources:found', this.updateExportObj);
-        return {sourceForm: false, exportObj:{}};
+        return {sourceForm: false, loggedIn: false, username: "", exportObj:{}};
+    },
+    warnExistingUser: function() {
+        alert("An account with this username already exists.");
+    },
+    warnInvalidPassword: function() {
+        alert("This username/password combination is invalid.");
+    },
+    setLoggedIn: function(data) {
+        this.setState({loggedIn: true});
+        this.setState({username: data.username});
+    },
+    setLoggedOut: function() {
+        this.setState({loggedIn: false});
+        this.setState({username: ""});
+        socket.emit('client:log-out');
     },
     toggleHidden: function() {
         if(this.state.sourceForm) {
@@ -42,7 +61,18 @@ var SideBar = React.createClass({
         if(!email || !password) {
             return;
         }
-        socket.emit('client:sign-in', {email: email, password: password});
+        socket.emit('client:log-in', {email: email, password: password});
+        email = "";
+        password = "";
+    },
+    handleCreateUser: function(e) {
+        e.preventDefault();
+        var email = this.refs.email.getValue();
+        var password = this.refs.password.getValue();
+        if(!email || !password) {
+            return;
+        }
+        socket.emit('client:create-user', {email: email, password: password});
         email = "";
         password = "";
     },
@@ -50,6 +80,9 @@ var SideBar = React.createClass({
         // var Glyphicon = ReactBootstrap.Glyphicon;
         return (
             <div className="side-bar col-xs-3 text-center">
+                {this.state.loggedIn ?
+                <Button className='log-out-btn' bsStyle='primary' onClick={this.setLoggedOut}>Log Out</Button>
+                :
                 <Panel bsStyle='primary' collapsable defaultCollapsed header='Sign In'>
                     <ListGroup fill>
                         <ListGroupItem>
@@ -58,9 +91,12 @@ var SideBar = React.createClass({
                                 <Input type="password" class="form-control" id="passwordField" placeholder="Password" ref="password" />
                                 <Input type="submit" value="Sign in" />
                             </form>
+                            <form className="createUser" onSubmit={this.handleCreateUser}>
+                                <Input type="submit" value="Create New User" />
+                            </form>
                         </ListGroupItem>
                     </ListGroup>
-                </Panel>
+                </Panel>}
 
                 <h4>Share your dashboard template.</h4>
                 <ButtonGroup vertical className="import-export-buttons">
@@ -78,8 +114,6 @@ var SideBar = React.createClass({
                         <a href="#"></a>
                     </div>                      
                 </OverlayTrigger>               
-                
-                {this.state.sourceForm ? <AddSourceForm url={this.props.url} /> : null }
             </div>
         )
     }
