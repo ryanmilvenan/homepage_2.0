@@ -110,6 +110,7 @@ var SideBar = React.createClass({
                         <a href="#"></a>
                     </div>                      
                 </OverlayTrigger>               
+                : null }
             </div>
         )
     }
