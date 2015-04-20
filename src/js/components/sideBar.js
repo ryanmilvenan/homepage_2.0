@@ -50,7 +50,6 @@ var SideBar = React.createClass({
         // var Glyphicon = ReactBootstrap.Glyphicon;
         return (
             <div className="side-bar col-xs-3 text-center">
-<<<<<<< Updated upstream
                 <Panel bsStyle='primary' collapsable defaultCollapsed header='Sign In'>
                     <ListGroup fill>
                         <ListGroupItem>
@@ -68,7 +67,9 @@ var SideBar = React.createClass({
                     <ModalTrigger modal={<ImportForm />}>
                         <Button>Import</Button>
                     </ModalTrigger>                             
-                    <Button>Export</Button>
+                    <a href="#" ref="file" download="mySources">
+                        <Button>Export</Button>
+                    </a>
                 </ButtonGroup>
                 <br/>
 
@@ -77,22 +78,6 @@ var SideBar = React.createClass({
                         <a href="#"></a>
                     </div>                      
                 </OverlayTrigger>               
-=======
-                    <Button bsStyle='primary' block>Sign in</Button><br/>
-                    <h4>Share your dashboard template.</h4>
-                    <ButtonGroup vertical className="import-export-buttons">
-                        <ModalTrigger modal={<ImportForm onRequestHide={this.importObj}/>}>
-                            <Button>Import</Button>
-                        </ModalTrigger>                             
-                    <a href="#" ref="file" download="mySources">
-                        <Button>Export</Button>
-                    </a>
-                    </ButtonGroup>
-                    <br/>
-                    <div className="add-button icon-plus">
-                        <a href="#" onClick={this.toggleHidden}></a>
-                    </div>
->>>>>>> Stashed changes
                 
                 {this.state.sourceForm ? <AddSourceForm url={this.props.url} /> : null }
             </div>
