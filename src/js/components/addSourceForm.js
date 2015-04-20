@@ -12,8 +12,9 @@ var AddSourceForm = React.createClass({
     },
     handleSubmit: function(e) {
         e.preventDefault();
-        var title = this.refs.title.getDOMNode().value.trim();
-        var url = this.refs.url.getDOMNode().value.trim();
+        var title = this.refs.title.getValue();
+        var url = this.refs.url.getValue();
+        console.log(this.refs.title.getDOMNode())
         if(!title || !url) {
             return;
         }
