@@ -34,7 +34,7 @@ var SideBar = React.createClass({
         if(!email || !password) {
             return;
         }
-        socket.emit('sign-in', {email: email, password: password});
+        socket.emit('client:sign-in', {email: email, password: password});
         email = "";
         password = "";
     },
