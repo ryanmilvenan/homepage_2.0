@@ -15,11 +15,13 @@ var Input = require('react-bootstrap').Input;
 
 var SideBar = React.createClass({
     updateExportObj: function(data) {
-        this.setState({exportObj:data})
-        var dataString = JSON.stringify(this.state.exportObj);
-        var dataBlob = new Blob([dataString], {type:'application/json'});
-        var exportTag = React.findDOMNode(this.refs.file);
-        exportTag.href = window.URL.createObjectURL(dataBlob);
+        if(this.props.loggedIn) {
+            this.setState({exportObj:data})
+            var dataString = JSON.stringify(this.state.exportObj);
+            var dataBlob = new Blob([dataString], {type:'application/json'});
+            var exportTag = React.findDOMNode(this.refs.file);
+            exportTag.href = window.URL.createObjectURL(dataBlob);
+        }
     },
     importObj: function(data) {
         console.log("HEARD CLICK");
@@ -28,8 +30,6 @@ var SideBar = React.createClass({
     getInitialState: function() {
         socket.on('server:user-exists', this.warnExistingUser);
         socket.on('server:invalid-password', this.warnInvalidPassword);
-        socket.on('server:log-in', this.setLoggedIn);
-        socket.on('server:log-out', this.setLoggedOut);
         socket.on('sources:found', this.updateExportObj);
         return {sourceForm: false, loggedIn: false, username: "", exportObj:{}};
     },
@@ -38,15 +38,6 @@ var SideBar = React.createClass({
     },
     warnInvalidPassword: function() {
         alert("This username/password combination is invalid.");
-    },
-    setLoggedIn: function(data) {
-        this.setState({loggedIn: true});
-        this.setState({username: data.username});
-    },
-    setLoggedOut: function() {
-        this.setState({loggedIn: false});
-        this.setState({username: ""});
-        socket.emit('client:log-out');
     },
     toggleHidden: function() {
         if(this.state.sourceForm) {
@@ -80,8 +71,8 @@ var SideBar = React.createClass({
         // var Glyphicon = ReactBootstrap.Glyphicon;
         return (
             <div className="side-bar col-xs-3 text-center">
-                {this.state.loggedIn ?
-                <Button className='log-out-btn' bsStyle='primary' onClick={this.setLoggedOut}>Log Out</Button>
+                {this.props.loggedIn ?
+                <Button className='log-out-btn' bsStyle='primary' onClick={this.props.logOutHandler}>Log Out</Button>
                 :
                 <Panel bsStyle='primary' collapsable defaultCollapsed header='Sign In'>
                     <ListGroup fill>
@@ -98,22 +89,28 @@ var SideBar = React.createClass({
                     </ListGroup>
                 </Panel>}
 
-                <h4>Share your dashboard template.</h4>
-                <ButtonGroup vertical className="import-export-buttons">
-                    <ModalTrigger modal={<ImportForm />}>
-                        <Button>Import</Button>
-                    </ModalTrigger>                             
-                    <a href="#" ref="file" download="mySources">
-                        <Button>Export</Button>
-                    </a>
-                </ButtonGroup>
-                <br/>
-
+                {this.props.loggedIn ?
+                <div>
+                    <h4>Share your dashboard template.</h4>
+                    <ButtonGroup vertical className="import-export-buttons">
+                        <ModalTrigger modal={<ImportForm />}>
+                            <Button>Import</Button>
+                        </ModalTrigger>                             
+                        <a href="#" ref="file" download="mySources">
+                            <Button>Export</Button>
+                        </a>
+                    </ButtonGroup>
+                    <br/>
+                </div>
+                : null }
+                
+                {this.props.loggedIn ?
                 <OverlayTrigger trigger='click' placement='left' overlay={<Popover title='Add an API'> Check this info.<AddSourceForm /></Popover>}>
                     <div id="scroll" className="add-button icon-plus">
                         <a href="#"></a>
                     </div>                      
-                </OverlayTrigger>               
+                </OverlayTrigger>
+                : null}          
             </div>
         )
     }
