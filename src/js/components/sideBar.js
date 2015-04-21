@@ -109,8 +109,8 @@ var SideBar = React.createClass({
                     <div id="scroll" className="add-button icon-plus">
                         <a href="#"></a>
                     </div>                      
-                </OverlayTrigger>
-                : null}          
+                </OverlayTrigger>               
+                : null }
             </div>
         )
     }
