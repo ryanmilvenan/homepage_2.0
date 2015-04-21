@@ -10,6 +10,7 @@ var DropdownButton = require('react-bootstrap').DropdownButton;
 var PageHeader = require('react-bootstrap').PageHeader;
 var TabbedArea = require('react-bootstrap').TabbedArea;
 var TabPane = require('react-bootstrap').TabPane;
+var DisplayCase = require('./displayCase');
 
 var TopBar = React.createClass({   
     render: function() {
@@ -18,8 +19,12 @@ var TopBar = React.createClass({
             <div className="col-xs-9">
                 <PageHeader className="title">Homepage 2.0</PageHeader>
                 <TabbedArea defaultActiveKey={2}>
-                    <TabPane eventKey={1} tab='Tab 1'>TabPane 1 content</TabPane>
-                    <TabPane eventKey={2} tab='Tab 2'>TabPane 2 content</TabPane>
+                    <TabPane eventKey={1} tab='Tab 1'>
+                        <DisplayCase url={this.props.url} /> 
+                    </TabPane>
+                    <TabPane eventKey={2} tab='Tab 2'> 
+                        <DisplayCase url={this.props.url} /> 
+                    </TabPane>
                 </TabbedArea>                
             </div>
         );

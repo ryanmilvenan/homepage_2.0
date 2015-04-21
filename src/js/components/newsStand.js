@@ -1,16 +1,12 @@
 var React = require('react');
 var socket = require('./socket');
 var NavBar = require('./navBar');
-var DisplayCase = require('./displayCase');
 var SideBar = require('./sideBar');
 var TopBar = require('./topBar');
 
 var NewsStand = React.createClass({
     loadNewsSources: function() {
         socket.emit('sources:retrieve');
-    },
-    updateSourceState: function(data) {
-        this.setState({data: data});
     },
     setLoggedIn: function(data) {
         console.log("HEARD LOG IN")
@@ -26,8 +22,7 @@ var NewsStand = React.createClass({
         socket.on('server:log-in', this.setLoggedIn);
         socket.on('server:log-out', this.setLoggedOut);
         socket.on('update:sources', this.loadNewsSources);
-        socket.on('sources:found', this.updateSourceState);
-        return {data: [], loggedIn: false, username: ""};
+        return {loggedIn: false, username: ""};
     },
     componentDidMount: function() {
         this.loadNewsSources();
@@ -36,8 +31,8 @@ var NewsStand = React.createClass({
         return (
             <div className="news-stand col-xs-12">
                 <SideBar url={this.props.url} loggedIn={this.state.loggedIn} logOutHandler={this.setLoggedOut} />                
-                <TopBar loggedIn={this.state.loggedIn} />
-                <DisplayCase url={this.props.url} data={this.state.data} />
+                <TopBar url={this.props.url} loggedIn={this.state.loggedIn} />
+                {/* <DisplayCase url={this.props.url} data={this.state.data} /> */}
             </div>
         );
     }
