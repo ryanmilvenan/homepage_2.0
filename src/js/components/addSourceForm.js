@@ -14,10 +14,11 @@ var AddSourceForm = React.createClass({
         e.preventDefault();
         var title = this.refs.title.getValue();
         var url = this.refs.url.getValue();
+        var username = this.props.username;
         if(!title || !url) {
             return;
         }
-        socket.emit('sources:new', {title: title, url: url});
+        socket.emit('sources:new', {title: title, url: url, username: username});
         title = "";
         url = "";
     },

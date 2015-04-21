@@ -9,7 +9,6 @@ var NewsStand = React.createClass({
         socket.emit('sources:retrieve');
     },
     setLoggedIn: function(data) {
-        console.log("HEARD LOG IN")
         this.setState({loggedIn: true});
         this.setState({username: data.username});
     },
@@ -30,9 +29,8 @@ var NewsStand = React.createClass({
     render: function() {
         return (
             <div className="news-stand col-xs-12">
-                <SideBar url={this.props.url} loggedIn={this.state.loggedIn} logOutHandler={this.setLoggedOut} />                
-                <TopBar url={this.props.url} loggedIn={this.state.loggedIn} />
-                {/* <DisplayCase url={this.props.url} data={this.state.data} /> */}
+                <SideBar url={this.props.url} username={this.state.username} loggedIn={this.state.loggedIn} logOutHandler={this.setLoggedOut} />                
+                <TopBar url={this.props.url} username={this.state.username} loggedIn={this.state.loggedIn} />
             </div>
         );
     }
