@@ -17,20 +17,24 @@ var NewsStand = React.createClass({
         this.setState({username: ""});
         socket.emit('client:log-out');
     },
+    updateSelectedTab: function(tab) {
+        this.setState({tab: tab});
+    },
     getInitialState: function() {
         socket.on('server:log-in', this.setLoggedIn);
         socket.on('server:log-out', this.setLoggedOut);
         socket.on('update:sources', this.loadNewsSources);
-        return {loggedIn: false, username: ""};
+        return {loggedIn: false, username: "", tab: {}};
     },
     componentDidMount: function() {
         this.loadNewsSources();
     },
     render: function() {
+        console.log("USER: " + this.state.username);
         return (
             <div className="news-stand col-xs-12">
-                <SideBar url={this.props.url} username={this.state.username} loggedIn={this.state.loggedIn} logOutHandler={this.setLoggedOut} />                
-                <TopBar url={this.props.url} username={this.state.username} loggedIn={this.state.loggedIn} />
+                <SideBar url={this.props.url} username={this.state.username} loggedIn={this.state.loggedIn} logOutHandler={this.setLoggedOut} tab={this.state.tab} />
+                <TopBar url={this.props.url} username={this.state.username} loggedIn={this.state.loggedIn} tabHandler={this.updateSelectedTab} />
             </div>
         );
     }

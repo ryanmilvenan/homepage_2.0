@@ -17,7 +17,7 @@ var NewsContainer = React.createClass({
         }
     },
     deleteSource: function() {
-       socket.emit('sources:remove', {sourceID: this.props.sourceID}); 
+        socket.emit('sources:remove', {sourceID: this.props.sourceID, tabIdx:this.props.tabIdx, sourceIdx:this.props.sourceIdx}); 
     },
     getInitialState: function() {
         socket.on('stream:item', this.updateItems);
@@ -26,8 +26,7 @@ var NewsContainer = React.createClass({
     handleRename: function(e) {
         e.preventDefault();
         var title = this.refs.title.getValue();
-        console.log(title);
-        socket.emit('sources:rename', {sourceID: this.props.sourceID, title: title}); 
+        socket.emit('sources:rename', {sourceID: this.props.sourceID, title: title, tabIdx:this.props.tabIdx, sourceIdx:this.props.sourceIdx}); 
         this.toggleHiddenRename();
     },
     toggleHiddenRename: function(){

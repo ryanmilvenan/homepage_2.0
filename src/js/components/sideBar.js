@@ -105,7 +105,7 @@ var SideBar = React.createClass({
                 : null }
                 
                 {this.props.loggedIn ?
-                <OverlayTrigger trigger='click' placement='left' overlay={<Popover title='Add an API'> Check this info.<AddSourceForm username={this.props.username} /></Popover>}>
+                <OverlayTrigger trigger='click' placement='left' overlay={<Popover title='Add an API'> Check this info.<AddSourceForm username={this.props.username} tab={this.props.tab} /></Popover>}>
                     <div id="scroll" className="add-button icon-plus">
                         <a href="#"></a>
                     </div>                      
