@@ -17,7 +17,7 @@ var NewsContainer = React.createClass({
         }
     },
     deleteSource: function() {
-        socket.emit('sources:remove', {sourceID: this.props.sourceID, tabIdx:this.props.tabIdx, sourceIdx:this.props.sourceIdx}); 
+        socket.emit('sources:remove', {sourceID: this.props.sourceID}); 
     },
     getInitialState: function() {
         socket.on('stream:item', this.updateItems);
@@ -26,11 +26,10 @@ var NewsContainer = React.createClass({
     handleRename: function(e) {
         e.preventDefault();
         var title = this.refs.title.getValue();
-        socket.emit('sources:rename', {sourceID: this.props.sourceID, title: title, tabIdx:this.props.tabIdx, sourceIdx:this.props.sourceIdx}); 
+        socket.emit('sources:rename', {sourceID: this.props.sourceID, title: title}); 
         this.toggleHiddenRename();
     },
     toggleHiddenRename: function(){
-        console.log(this.state.rename)
         if(this.state.rename) {
             this.setState({rename: false});
         } else
@@ -43,14 +42,17 @@ var NewsContainer = React.createClass({
                 <ListGroupItem><a href={item.link}>{item.title}</a></ListGroupItem>
             )
         })
+        console.log(this.props.loggedIn)
         return (
             <div>
-                <div className="down-button">
-                    <DropdownButton bsSize='xsmall' key={1}>
-                        <MenuItem eventKey='1' onSelect={this.toggleHiddenRename}>Rename</MenuItem>
-                        <MenuItem eventKey='2' onSelect={this.deleteSource}>Close</MenuItem>
-                    </DropdownButton>
-                </div>
+                {this.props.loggedIn ?
+                    <div className="down-button">
+                        <DropdownButton bsSize='xsmall' key={1}>
+                            <MenuItem eventKey='1' onSelect={this.toggleHiddenRename}>Rename</MenuItem>
+                            <MenuItem eventKey='2' onSelect={this.deleteSource}>Close</MenuItem>
+                        </DropdownButton>
+                    </div>
+                : null}
                 {this.state.rename ? <form className="rename col-xs-2" onSubmit={this.handleRename}>
                     <Input type="text" placeholder="Title" ref="title" />
                 </form> : null }

@@ -40,7 +40,7 @@ var TopBar = React.createClass({
             tabIdx++;
             return (
                 <TabPane eventKey={tabIdx} tab={tab.title} > 
-                    <DisplayCase url={this.props.url} />
+                    <DisplayCase url={this.props.url} loggedIn={this.props.loggedIn} />
                 </TabPane>
             )
         }.bind(this));

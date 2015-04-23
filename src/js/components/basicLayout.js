@@ -30,10 +30,10 @@ getDefaultProps: function() {
         counter += 1
             return (
                 <div key={counter}>
-                    <NewsContainer key={container.id} tabIdx={container.tabIdx} sourceIdx={container.sourceIdx} url={container.url} title={container.title} sourceID={container.sourceID} numItems={10} />
+                    <NewsContainer key={container.id} url={container.url} title={container.title} sourceID={container.sourceID} numItems={10} loggedIn={this.props.loggedIn} />
                 </div>
             );
-        });
+        }.bind(this));
     return containers
   },
 

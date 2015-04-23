@@ -14,7 +14,7 @@ var DisplayCase = React.createClass({
     render: function() {
         return (
             <div className="display-case col-xs-9">
-                <BasicLayout data={this.state.data} />
+                <BasicLayout data={this.state.data} loggedIn={this.props.loggedIn} />
             </div>
         );
     }
