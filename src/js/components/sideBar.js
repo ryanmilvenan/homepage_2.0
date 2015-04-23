@@ -15,7 +15,7 @@ var Input = require('react-bootstrap').Input;
 
 var SideBar = React.createClass({
     updateExportObj: function(data) {
-        if(this.props.loggedIn) {
+        if(this.props.loggedIn && this.props.sideBar) {
             this.setState({exportObj:data})
             var dataString = JSON.stringify(this.state.exportObj);
             var dataBlob = new Blob([dataString], {type:'application/json'});
