@@ -42,7 +42,6 @@ var NewsContainer = React.createClass({
                 <ListGroupItem><a href={item.link}>{item.title}</a></ListGroupItem>
             )
         })
-        console.log(this.props.loggedIn)
         return (
             <div>
                 {this.props.loggedIn ?
