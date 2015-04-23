@@ -48,7 +48,7 @@ var TopBar = React.createClass({
         return (
             <div className="col-xs-9">
                 <PageHeader className="title">Homepage 2.0</PageHeader>
-                <iframe src="http://duckduckgo.com/search.html?prefill=search duckduckgo" className="search-bar" frameborder="0"></iframe>
+                <iframe src="https://duckduckgo.com/search.html?prefill=search duckduckgo" className="search-bar" frameborder="0"></iframe>
                 <TabbedArea activeKey={this.state.key} onSelect={this.handleSelect}>
                     {tabs}
                     {this.props.username ? 
