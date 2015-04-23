@@ -34,17 +34,25 @@
     content: "\ea0a";
 }
 
-.icon-cross:before {
-    content: "\ea0f";
-}
-
-.icon-cross {
-    color: red;
-}
-
 .icon-plus {
     color: #1A619F;
 }
+
+.icon-cog:before {
+  content: "\e994";
+}
+
+.icon-cog {
+    color: #B8BCBF;
+}
+
+.down-button {
+    z-index: 3;
+    position: relative;
+    display: block-inline;
+    float:right;
+}
+
 
 body {
   background: #fff;
@@ -120,6 +128,7 @@ ul {
   font-weight: bold;
   margin: 0;
   padding: 0;
+  display: inline-block;
 }
 
 .add-source-form {
@@ -217,6 +226,25 @@ ul {
     left: 0;
     text-decoration: none;
     z-index: 10;
+}
+
+.menu-button {
+    height:1em;
+    width:1em;
+    float: right;
+    font-size:40px;
+    position: relative;
+}
+
+.menu-button a {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    text-decoration: none;
+    z-index: 10;
+    float: right;
 }
 
 .react-grid-layout {

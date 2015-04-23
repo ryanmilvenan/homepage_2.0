@@ -70,6 +70,8 @@ var SideBar = React.createClass({
     render: function() {
         // var Glyphicon = ReactBootstrap.Glyphicon;
         return (
+            <div>
+            {this.props.sideBar ?
             <div className="side-bar col-xs-3 text-center">
                 {this.props.loggedIn ?
                 <Button className='log-out-btn' bsStyle='primary' onClick={this.props.logOutHandler}>Log Out</Button>
@@ -111,6 +113,8 @@ var SideBar = React.createClass({
                     </div>                      
                 </OverlayTrigger>               
                 : null }
+            </div>
+            : null}
             </div>
         )
     }

@@ -20,21 +20,27 @@ var NewsStand = React.createClass({
     updateSelectedTab: function(tab) {
         this.setState({tab: tab});
     },
+    updateSideBar: function(state) {
+        var oldSideBar = this.state.sideBar;
+        this.setState({sideBar: !oldSideBar});
+        this.refs.topbar.handleSideBar();
+    },
     getInitialState: function() {
         socket.on('server:log-in', this.setLoggedIn);
         socket.on('server:log-out', this.setLoggedOut);
         socket.on('update:sources', this.loadNewsSources);
-        return {loggedIn: false, username: "", tab: {}};
+        return {loggedIn: false, username: "", tab: {}, sideBar: false};
     },
     componentDidMount: function() {
         this.loadNewsSources();
     },
     render: function() {
         console.log("USER: " + this.state.username);
+        console.log("Sidebar " + this.state.sideBar);
         return (
             <div className="news-stand col-xs-12">
-                <SideBar url={this.props.url} username={this.state.username} loggedIn={this.state.loggedIn} logOutHandler={this.setLoggedOut} tab={this.state.tab} />
-                <TopBar url={this.props.url} username={this.state.username} loggedIn={this.state.loggedIn} tabHandler={this.updateSelectedTab} />
+                <SideBar url={this.props.url} username={this.state.username} loggedIn={this.state.loggedIn} logOutHandler={this.setLoggedOut} tab={this.state.tab} sideBar={this.state.sideBar} />
+                <TopBar url={this.props.url} username={this.state.username} loggedIn={this.state.loggedIn} tabHandler={this.updateSelectedTab} sidebarHandler={this.updateSideBar} sideBar={this.state.sideBar} ref="topbar" />
             </div>
         );
     }

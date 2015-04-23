@@ -30,9 +30,20 @@ var TopBar = React.createClass({
             socket.emit("tab:new", {title: tabTitle, user:this.props.username, tabIdx:tabIdx});
         }
     },
+    toggleSideBar: function() {
+        this.props.sidebarHandler();
+    },
     getInitialState: function() {
         socket.on('server:tabs', this.loadTabs);
-        return {data: [], key: 1, numTabs: 0};
+        return {data: [], key: 1, numTabs: 0, colSize:"col-xs-12"};
+    },
+    handleSideBar: function() {
+        console.log("GOT CALLED");
+        if(this.props.sideBar) {
+            this.setState({colSize:"col-xs-12"});
+        } else {
+            this.setState({colSize:"col-xs-9"});
+        }
     },
     render: function() {
         var tabIdx = 0;
@@ -46,8 +57,11 @@ var TopBar = React.createClass({
         }.bind(this));
         tabIdx++;
         return (
-            <div className="col-xs-9">
+            <div className={this.state.colSize}>
                 <PageHeader className="title">Homepage 2.0</PageHeader>
+                <div className="menu-button icon-cog">
+                    <a href="#" onClick={this.toggleSideBar}></a>
+                </div>
                 <iframe src="https://duckduckgo.com/search.html?prefill=search duckduckgo" className="search-bar" frameborder="0"></iframe>
                 <TabbedArea activeKey={this.state.key} onSelect={this.handleSelect}>
                     {tabs}
