@@ -279,3 +279,13 @@ ul {
     font-size: 0.8em;
     padding: 10px 15px;
 }
+
+.search-bar {
+    overflow:hidden;
+    margin:0 auto;
+    padding:0;
+    width:408px;
+    height:40px;
+    display: block;
+} 
+
