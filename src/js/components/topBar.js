@@ -38,7 +38,6 @@ var TopBar = React.createClass({
         return {data: [], key: 1, numTabs: 0, colSize:"col-xs-12"};
     },
     handleSideBar: function() {
-        console.log("GOT CALLED");
         if(this.props.sideBar) {
             this.setState({colSize:"col-xs-12"});
         } else {
@@ -50,8 +49,8 @@ var TopBar = React.createClass({
         var tabs = this.state.data.map(function(tab) {
             tabIdx++;
             return (
-                <TabPane eventKey={tabIdx} tab={tab.title} > 
-                    <DisplayCase url={this.props.url} loggedIn={this.props.loggedIn} />
+                <TabPane key={tabIdx} eventKey={tabIdx} tab={tab.title} > 
+                    <DisplayCase key={tabIdx} url={this.props.url} loggedIn={this.props.loggedIn} />
                 </TabPane>
             )
         }.bind(this));
@@ -62,7 +61,7 @@ var TopBar = React.createClass({
                 <div className="menu-button icon-cog">
                     <a href="#" onClick={this.toggleSideBar}></a>
                 </div>
-                <iframe src="https://duckduckgo.com/search.html?prefill=search duckduckgo" className="search-bar" frameborder="0"></iframe>
+                <iframe src="https://duckduckgo.com/search.html?prefill=search duckduckgo" className="search-bar" frameBorder="0"></iframe>
                 <TabbedArea activeKey={this.state.key} onSelect={this.handleSelect}>
                     {tabs}
                     {this.props.username ? 
