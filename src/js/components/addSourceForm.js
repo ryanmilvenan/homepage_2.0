@@ -23,10 +23,19 @@ var AddSourceForm = React.createClass({
         var title = this.refs.title.getValue();
         var url = this.refs.url.getValue();
         var username = this.props.username;
+        console.log(this.props.tab);
+        var number = this.props.tab.sources.length;
+        var w = 3;
+        var h = 18;
+        var x = (number-parseInt(number/4)*4)*w;
+        console.log(number/4);
+        console.log(parseInt(number/4));
+        console.log(parseInt(x));
+        var y = parseInt(number/4)*h;
         if(!title || !url) {
             return;
         }
-        socket.emit('sources:new', {title: title, url: url, username: username, tab: tab});
+        socket.emit('sources:new', {title: title, url: url, username: username, tab: tab, x:x, y:y, h:h, w:w});
         this.setState({titleValue: ''});
         this.setState({urlValue: ''});
     },

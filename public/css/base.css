@@ -23,13 +23,6 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.down-button {
-    z-index: 3;
-    position: relative;
-    display: block-inline;
-    float:right;
-}
-
 .icon-plus:before {
     content: "\ea0a";
 }
