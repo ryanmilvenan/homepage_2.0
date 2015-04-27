@@ -54,10 +54,10 @@ var NewsContainer = React.createClass({
                         </DropdownButton>
                     </div>
                 : null}
-                {this.state.rename ? <form className="rename col-xs-2" onSubmit={this.handleRename}>
-                    <Input type="text" placeholder="Title" ref="title" />
+                {this.state.rename ? <form className="rename col-xs-10" onSubmit={this.handleRename}>
+                    <Input type="text" className="rename-bar" placeholder={this.props.title} ref="title" />
                 </form> : null }
-                <Panel collapsable defaultExpanded header={this.props.title} bsStyle='success'>
+                <Panel collapsable defaultExpanded header={this.props.title} bsStyle='success' className="news-panel">
                     <ListGroup fill>
                         {items}
                     </ListGroup>

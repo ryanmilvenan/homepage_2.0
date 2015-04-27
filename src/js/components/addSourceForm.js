@@ -26,7 +26,7 @@ var AddSourceForm = React.createClass({
         console.log(this.props.tab);
         var number = this.props.tab.sources.length;
         var w = 3;
-        var h = 4;
+        var h = 18;
         var x = (number-parseInt(number/4)*4)*w;
         console.log(number/4);
         console.log(parseInt(number/4));
