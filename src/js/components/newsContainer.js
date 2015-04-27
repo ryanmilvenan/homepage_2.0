@@ -57,7 +57,7 @@ var NewsContainer = React.createClass({
                 {this.state.rename ? <form className="rename col-xs-2" onSubmit={this.handleRename}>
                     <Input type="text" placeholder="Title" ref="title" />
                 </form> : null }
-                <Panel collapsable defaultExpanded header={this.props.title}>
+                <Panel collapsable defaultExpanded header={this.props.title} bsStyle='success'>
                     <ListGroup fill>
                         {items}
                     </ListGroup>
