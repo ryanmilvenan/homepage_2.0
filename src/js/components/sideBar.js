@@ -93,24 +93,33 @@ var SideBar = React.createClass({
 
                 {this.props.loggedIn ?
                 <div>
-                    <h4>Share your dashboard template.</h4>
-                    <ButtonGroup vertical className="import-export-buttons">
-                        <ModalTrigger modal={<ImportForm />}>
-                            <Button>Import</Button>
-                        </ModalTrigger>                             
-                        <a href="#" ref="file" download="mySources">
-                            <Button>Export</Button>
-                        </a>
-                    </ButtonGroup>
+                    <div className='share-template'>
+                        <h4>Share your dashboard template.</h4>
+                        <ButtonGroup vertical className="import-export-buttons">
+                            <ModalTrigger modal={<ImportForm />}>
+                                <Button>Import</Button>
+                            </ModalTrigger>                             
+                            <a href="#" ref="file" download="mySources">
+                                <Button>Export</Button>
+                            </a>
+                        </ButtonGroup>
+                    </div>
                     <br/>
+                    <div className='remove-tab'>
+                        <h5>Remove a tab.</h5>
+                        <div style={{display:'inline-block'}} className="remove-tab-button icon-bin">
+                            <a href="#"></a>
+                        </div>
+                        <p className='remove-tab-name'>Tab1</p>
+                    </div>
                 </div>
                 : null }
                 
                 {this.props.loggedIn ?
-                <OverlayTrigger trigger='click' placement='left' overlay={<Popover title='Add an API'> Check this info.<AddSourceForm username={this.props.username} tab={this.props.tab} /></Popover>}>
+                <OverlayTrigger trigger='click' placement='left' overlay={<Popover title='Add an RSS feed'> Check this info.<AddSourceForm username={this.props.username} tab={this.props.tab} /></Popover>}>
                     <div id="scroll" className="add-button icon-plus">
                         <a href="#"></a>
-                    </div>                      
+                    </div>
                 </OverlayTrigger>               
                 : null }
             </div>
