@@ -40,9 +40,9 @@ var NewsContainer = React.createClass({
         var idx = 0;
         var items = slice.map(function(item) {
             idx++;
-            // console.log(item);
+            console.log(item);
             return (
-                <NewsItem idx={idx} title={item.title} summary={item.summary} link={item.link}/>
+                <ListGroupItem key={idx}><a href={item.link}>{item.title}</a></ListGroupItem>
             )
         })
         return (
