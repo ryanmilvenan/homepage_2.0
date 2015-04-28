@@ -40,8 +40,9 @@ var NewsContainer = React.createClass({
         var idx = 0;
         var items = slice.map(function(item) {
             idx++;
+            // console.log(item);
             return (
-                <ListGroupItem key={idx}><a href={item.link}>{item.title}</a></ListGroupItem>
+                <NewsItem idx={idx} title={item.title} summary={item.summary} link={item.link}/>
             )
         })
         return (
@@ -57,7 +58,7 @@ var NewsContainer = React.createClass({
                 {this.state.rename ? <form className="rename col-xs-10" onSubmit={this.handleRename}>
                     <Input type="text" className="rename-bar" placeholder={this.props.title} ref="title" />
                 </form> : null }
-                <Panel collapsable defaultExpanded header={this.props.title} bsStyle='success' className="news-panel">
+                <Panel collapsable defaultExpanded header={this.state.rename ? '_':this.props.title} bsStyle='primary' className="news-panel">
                     <ListGroup fill>
                         {items}
                     </ListGroup>

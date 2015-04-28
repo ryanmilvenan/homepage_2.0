@@ -80,7 +80,6 @@ var BasicLayout = React.createClass({
             onLayoutChange={this.onLayoutChange}>
             {this.generateDOM()}
         </ReactGridLayout>
-
       </div>
     );
   }

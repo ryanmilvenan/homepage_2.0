@@ -1,19 +1,31 @@
 var React = require('react');
+var CollapsableMixin = require('react-bootstrap').CollapsableMixin;
+var ListGroupItem = require('react-bootstrap').ListGroupItem;
+var classSet = require('class-set');
 var NewsItem = React.createClass({
-    getInitialState: function() {
-        return {description: []};
+    mixins: [CollapsableMixin],
+
+    getCollapsableDOMNode: function(){
+        return this.refs.panel.getDOMNode();
     },
-    expandArticle: function() {
-        if(this.state.description.length > 0) {
-            this.setState({description: []}); 
-        } else {
-            this.setState({description: this.props.data.description})
-        }
-        console.log(this.props.data)
+
+    getCollapsableDimensionValue: function(){
+        return this.refs.panel.getDOMNode().scrollHeight;
     },
+
+    onHandleToggle: function(e){
+        e.preventDefault();
+        this.setState({expanded:!this.state.expanded});
+    },
+
     render: function() {
+        var styles = this.getCollapsableClassSet();
         return (
-            <ListGroupItem><a href={this.props.link}>{this.props.title}</a></ListGroupItem>
+            <ListGroupItem key={this.props.idx}><a href="#" onClick={this.onHandleToggle}>{this.props.title}</a>
+            <div ref='panel' className={classSet(styles)}>
+                <div dangerouslySetInnerHTML={{__html: this.props.summary}} />
+                <a href={this.props.link}>Detail</a>
+            </div></ListGroupItem>
         )
     }
 });

@@ -57,11 +57,13 @@ var TopBar = React.createClass({
         tabIdx++;
         return (
             <div className={this.state.colSize}>
-                <PageHeader className="title">Homepage 2.0</PageHeader>
+             
+                <PageHeader className="title"><small>Homepage 2.0</small></PageHeader>
+                <iframe src="https://duckduckgo.com/search.html?prefill=search duckduckgo" className="search-bar" frameBorder="0"></iframe>
+
                 <div className="menu-button icon-cog">
                     <a href="#" onClick={this.toggleSideBar}></a>
                 </div>
-                <iframe src="https://duckduckgo.com/search.html?prefill=search duckduckgo" className="search-bar" frameBorder="0"></iframe>
                 <TabbedArea activeKey={this.state.key} onSelect={this.handleSelect}>
                     {tabs}
                     {this.props.username ? 
