@@ -46,6 +46,9 @@
     float:right;
 }
 
+.dropdown-meno{
+  overflow: visible;
+}
 
 body {
   background: #fff;
@@ -303,10 +306,10 @@ ul {
 
 .search-bar {
     overflow:hidden;
-    margin:0 auto;
+    margin:0 auto 0 2em;
     padding:0;
     width:408px;
     height:40px;
-    display: block;
+    display: inline-block;
 } 
 
