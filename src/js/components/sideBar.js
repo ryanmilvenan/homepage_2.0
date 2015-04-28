@@ -31,7 +31,19 @@ var SideBar = React.createClass({
         socket.on('server:user-exists', this.warnExistingUser);
         socket.on('server:invalid-password', this.warnInvalidPassword);
         socket.on('sources:found', this.updateExportObj);
-        return {sourceForm: false, loggedIn: false, username: "", exportObj:{}};
+        socket.on('addsource:success', this.hidePopover);
+        socket.on('server:tabs', this.setTabs);
+        return {sourceForm: false, loggedIn: false, username: "", exportObj:{}, tabs:[]};
+    },
+    hidePopover: function(){
+        this.refs.addSource.hide();
+    },
+    setTabs: function(data){
+        this.setState({tabs: data.tabs});
+        console.log(this.state.tabs);
+    },
+    removeTab: function(){
+        
     },
     warnExistingUser: function() {
         alert("An account with this username already exists.");
@@ -69,6 +81,21 @@ var SideBar = React.createClass({
     },
     render: function() {
         // var Glyphicon = ReactBootstrap.Glyphicon;
+        if(this.state.tabs.length > 0){
+            console.log("tabs work", this.state.tabs.length);
+            var tabs = this.state.tabs.map(function(tab){
+                return(
+                    <div>
+                        <div onClick={this.removeTab} style={{display:'inline-block'}} className="remove-tab-button icon-bin">
+                            <a href="#"></a>
+                        </div>
+                        <p className='remove-tab-name'> {tab.title} </p> 
+                        <br/>           
+                    </div>
+                );
+            }.bind(this));
+            console.log("Tabs: ",tabs);
+        }
         return (
             <div>
             {this.props.sideBar ?
@@ -93,24 +120,30 @@ var SideBar = React.createClass({
 
                 {this.props.loggedIn ?
                 <div>
-                    <h4>Share your dashboard template.</h4>
-                    <ButtonGroup vertical className="import-export-buttons">
-                        <ModalTrigger modal={<ImportForm />}>
-                            <Button>Import</Button>
-                        </ModalTrigger>                             
-                        <a href="#" ref="file" download="mySources">
-                            <Button>Export</Button>
-                        </a>
-                    </ButtonGroup>
+                    <div className='share-template'>
+                        <h4>Share your dashboard template.</h4>
+                        <ButtonGroup vertical className="import-export-buttons">
+                            <ModalTrigger modal={<ImportForm />}>
+                                <Button>Import</Button>
+                            </ModalTrigger>                             
+                            <a href="#" ref="file" download="mySources">
+                                <Button>Export</Button>
+                            </a>
+                        </ButtonGroup>
+                    </div>
                     <br/>
+                    <div className='remove-tab'>
+                        <h5>Remove a tab.</h5>
+                        {tabs}
+                    </div>
                 </div>
                 : null }
                 
                 {this.props.loggedIn ?
-                <OverlayTrigger trigger='click' placement='left' overlay={<Popover title='Add an API'> Check this info.<AddSourceForm username={this.props.username} tab={this.props.tab} /></Popover>}>
+                <OverlayTrigger ref='addSource' trigger='click' placement='left' overlay={<Popover title='Add an RSS feed'> Check this info.<AddSourceForm username={this.props.username} tab={this.props.tab} /></Popover>}>
                     <div id="scroll" className="add-button icon-plus">
                         <a href="#"></a>
-                    </div>                      
+                    </div>
                 </OverlayTrigger>               
                 : null }
             </div>

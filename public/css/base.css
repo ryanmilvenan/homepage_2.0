@@ -39,6 +39,14 @@
     color: #B8BCBF;
 }
 
+.icon-cross:before {
+  content: "\ea0f";
+}
+
+.icon-bin:before {
+  content: "\e9ac";
+}
+
 .down-button {
     z-index: 3;
     position: relative;
@@ -136,8 +144,38 @@ ul {
   width: auto;
 }
 
+.add-source-inputs{
+  padding-right: 0px;
+}
+
 .side-bar{
   float: right;
+}
+
+.remove-tab-button {
+    height:1em;
+    width:1em;
+    float: left;
+    font-size:20px;
+    position: relative;
+}
+
+.remove-tab-button a {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    text-decoration: none;
+    z-index: 10;
+    float: left;
+    color: red;
+}
+
+.remove-tab-name{
+  margin: 0 0 0 10px;
+  float: left;
+  display: inline-block;
 }
 
 .news-container {
