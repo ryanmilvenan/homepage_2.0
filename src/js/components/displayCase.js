@@ -1,15 +1,17 @@
 var React = require('react');
 var socket = require('./socket');
 var NewsContainer = require('./newsContainer');
-var BasicLayout = require('./basicLayout.js')
+var BasicLayout = require('./basicLayout.js');
 
 var DisplayCase = React.createClass({
     updateSourceState: function(data) {
         this.setState({data: data});
     },
     getInitialState: function() {
+        return {data: []};
+    },
+    componentDidMount: function() {
         socket.on('sources:found', this.updateSourceState);
-        return {data: []}
     },
     render: function() {
         return (

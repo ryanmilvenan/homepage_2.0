@@ -15,6 +15,7 @@ var NewsStand = React.createClass({
     setLoggedOut: function() {
         this.setState({loggedIn: false});
         this.setState({username: ""});
+        this.refs.topbar.resetTab();
         socket.emit('client:log-out');
     },
     updateSelectedTab: function(tab) {

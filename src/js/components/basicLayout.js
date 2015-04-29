@@ -45,21 +45,18 @@ var BasicLayout = React.createClass({
   },
 
   onLayoutChange: function(layout) {
-    console.log('layout changed', layout);
     // this.props.onLayoutChange(layout); // updates status display
     this.setState({layout: layout});
-    console.log(layout);
-    console.log(this.props.data);
-    var counter = 0
+    var counter = 0;
     for (var i = 0; i < this.props.data.length; i++){
-      socket.emit('sources:updatePosition', {sourceID: this.props.data[i].sourceID, x: layout[i].x, y: layout[i].y})
+      socket.emit('sources:updatePosition', {sourceID: this.props.data[i].sourceID, x: layout[i].x, y: layout[i].y});
     }
   },
 
   generateDOM: function() {
-    var counter = 0
+    var counter = 0;
     var containers = this.props.data.map(function(container) {
-        counter += 1
+        counter += 1;
         // console.log(container)
             return (
               <div key={counter} _grid={{w: container.w, h: container.h, x: container.x, y: container.y}}>
@@ -71,7 +68,6 @@ var BasicLayout = React.createClass({
   },
 
   render: function() {
-    console.log
     return (
       <div>
         <ReactGridLayout

@@ -11,15 +11,15 @@ var ImportForm = React.createClass({
     return {template: false, activeKey: '1'};
   },
   importFile: function(e,data) {
-    e.preventDefault()
+    e.preventDefault();
     var file = document.getElementById('import').files[0];
     var fr = new FileReader();
     var user = this.props.username;
     fr.onload = function() {
-        socket.emit('sources:import', {data: this.result, user:user})
-    }
+        socket.emit('sources:import', {data: this.result, user:user});
+    };
     fr.readAsText(file);
-    this.props.onRequestHide()
+    this.props.onRequestHide();
   },  
   handleSelect: function(activeKey) {
     this.setState({ activeKey });
@@ -35,7 +35,7 @@ var ImportForm = React.createClass({
             </Panel>
             <Panel header='Upload a file' eventKey='2'>
               <form>
-                  <Input type='file' label='File' ref='file' help='Select a JSON template file.' />
+                  <Input type='file' id="import" label='File' ref='file' help='Select a JSON template file.' />
               </form>
               <div className='modal-footer'>
                   <Button onClick={this.importFile}>Load template</Button>

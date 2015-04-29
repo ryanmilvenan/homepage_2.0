@@ -16,7 +16,7 @@ var Input = require('react-bootstrap').Input;
 var SideBar = React.createClass({
     updateExportObj: function(data) {
         if(this.props.loggedIn && this.props.sideBar) {
-            this.setState({exportObj:data})
+            this.setState({exportObj:data});
             var dataString = JSON.stringify(this.state.exportObj);
             var dataBlob = new Blob([dataString], {type:'application/json'});
             var exportTag = React.findDOMNode(this.refs.file);
@@ -26,7 +26,7 @@ var SideBar = React.createClass({
     getInitialState: function() {
         socket.on('server:user-exists', this.warnExistingUser);
         socket.on('server:invalid-password', this.warnInvalidPassword);
-        socket.on('sources:found', this.updateExportObj);
+        socket.on('sources:tab', this.updateExportObj);
         socket.on('addsource:success', this.hidePopover);
         socket.on('server:tabs', this.setTabs);
         return {sourceForm: false, loggedIn: false, username: "", exportObj:{}, tabs:[]};
@@ -37,8 +37,11 @@ var SideBar = React.createClass({
     setTabs: function(data){
         this.setState({tabs: data.tabs});
     },
-    removeTab: function(){
-        
+    removeTab: function(e){
+        var target = e.target;
+        var tabID = target.dataset.id;
+        var username = this.props.username;
+        socket.emit('tab:remove', {tabID:tabID, username: username});
     },
     warnExistingUser: function() {
         alert("An account with this username already exists.");
@@ -75,13 +78,21 @@ var SideBar = React.createClass({
         password = "";
     },
     render: function() {
+        var exportTitle;
+        if(this.props.tab) {
+            exportTitle = "template_"+this.props.tab.title;
+        } else {
+            exportTitle = "";
+        }
         // var Glyphicon = ReactBootstrap.Glyphicon;
         if(this.state.tabs.length > 0){
+            var counter = 0;
             var tabs = this.state.tabs.map(function(tab){
+                counter++;
                 return(
-                    <div>
+                    <div key={counter}>
                         <div onClick={this.removeTab} style={{display:'inline-block'}} className="remove-tab-button icon-bin">
-                            <a href="#"></a>
+                            <a href="#" data-id={tab.tabID}></a>
                         </div>
                         <p className='remove-tab-name'> {tab.title} </p> 
                         <br/>           
@@ -116,10 +127,10 @@ var SideBar = React.createClass({
                     <div className='share-template'>
                         <h4>Share your dashboard template.</h4>
                         <ButtonGroup vertical className="import-export-buttons">
-                            <ModalTrigger modal={<ImportForm />}>
+                            <ModalTrigger modal={<ImportForm username={this.props.username} />}>
                                 <Button>Import</Button>
                             </ModalTrigger>                             
-                            <a href="#" ref="file" download="mySources">
+                            <a href="#" ref="file" download={exportTitle}>
                                 <Button>Export</Button>
                             </a>
                         </ButtonGroup>

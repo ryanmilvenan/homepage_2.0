@@ -33,9 +33,15 @@ var TopBar = React.createClass({
     toggleSideBar: function() {
         this.props.sidebarHandler();
     },
+    resetTab: function() {
+        this.setState({key: 1});
+    },
     getInitialState: function() {
-        socket.on('server:tabs', this.loadTabs);
         return {data: [], key: 1, numTabs: 0, colSize:"col-xs-12"};
+    },
+    componentDidMount: function() {
+        socket.on('server:tabs', this.loadTabs);
+        socket.on('client:log-out', this.resetTab);
     },
     handleSideBar: function() {
         if(this.props.sideBar) {
