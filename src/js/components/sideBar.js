@@ -23,10 +23,6 @@ var SideBar = React.createClass({
             exportTag.href = window.URL.createObjectURL(dataBlob);
         }
     },
-    importObj: function(data) {
-        console.log("HEARD CLICK");
-        console.log(data);
-    },
     getInitialState: function() {
         socket.on('server:user-exists', this.warnExistingUser);
         socket.on('server:invalid-password', this.warnInvalidPassword);
@@ -40,7 +36,6 @@ var SideBar = React.createClass({
     },
     setTabs: function(data){
         this.setState({tabs: data.tabs});
-        console.log(this.state.tabs);
     },
     removeTab: function(){
         
@@ -82,7 +77,6 @@ var SideBar = React.createClass({
     render: function() {
         // var Glyphicon = ReactBootstrap.Glyphicon;
         if(this.state.tabs.length > 0){
-            console.log("tabs work", this.state.tabs.length);
             var tabs = this.state.tabs.map(function(tab){
                 return(
                     <div>
@@ -94,7 +88,6 @@ var SideBar = React.createClass({
                     </div>
                 );
             }.bind(this));
-            console.log("Tabs: ",tabs);
         }
         return (
             <div>
